@@ -1,1 +1,150 @@
+<!Doctype: HTML w/ Processing>
 
+<html>
+
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Art-Processor</title>
+      <script type="text/javascript" src="js/processing.js"></script>
+  </head>
+  
+  <body>
+    <h1>Art-Processor</h1>
+    <p>This is a game that you get to create art. Activate red, green, and blue using their respective keys (r,g,b). Also you can change opacity using o and p.</p>
+    
+    <script type="text/processing">
+    
+      
+      float circleSize, opacity, weight;
+      boolean red, green, blue;
+      float r,g,b,o;
+
+      void setup(){
+        size(1200,800);
+        setUpOrClear();
+        circleSize = 30;
+        o = 255;
+        weight = 0;
+      }
+      void setUpOrClear(){
+        background(300,300,300); //black
+        fill(0); //fill white for text
+        textSize(30);
+        text("Hover and move your mouse", 10,40);
+
+        fill(238,130,238);
+        text("Clear",width-170,70);
+        stroke(0,0,255);
+        red = false;
+        green = false;
+        blue = false;
+
+      }
+      void draw(){
+        fill(r,g,b,o);
+        strokeWeight(weight);
+        if(mouseY>100){ //leave a restricted area at the top of the screen
+          ellipse(mouseX,mouseY,circleSize,circleSize);
+        }
+        if(mouseX>width-200 && mouseX<width-50 && mouseY>40 && mouseY<80){
+         fill(100,100,50);
+         text("Clear",width-170,70);
+          if(mousePressed){
+            background(300,300,300);
+            fill(0); //fill white for text
+            textSize(30);
+            text("Hover and move your mouse", 10,40);
+          }
+        }
+        else{  //not hovering over clear button
+          fill(238,130,238);
+          text("Clear",width-170,70);
+        }
+        if(keyPressed){
+           if(keyCode==UP){
+             circleSize+=5;
+           }
+           else if(keyCode==DOWN){
+             circleSize-=5;
+           }
+
+           if(key=='r'){
+             red=!red;
+
+           }
+
+           if(key=='b'){
+             blue=!blue;
+
+           }
+
+           if(key=='g'){
+             green=!green;
+
+           }
+           if(o < 255){
+             if(key=='o'){
+               o+=5;
+
+             }
+           }
+           if (o != 0){
+             if(key == 'p'){
+               o-=5;
+             }
+           }
+           if(weight <10){
+             if(key=='s'){
+               weight+=1;
+             }
+           }
+           if (weight != 0){
+             if(key == 'd'){
+               weight-=1;
+
+             }
+           }
+        }
+        if(red){
+         r = random(0,255);
+         fill(255,0,0);
+         rect(width-300,50,50,50);
+
+        }
+        else{
+         r = 0;
+         fill(0);
+         rect(width-300,50,50,50);
+
+        }
+        if(blue){
+         b = random(0,255);
+         fill(0,0,255);
+         rect(width-400,50,50,50);
+
+        }
+        else{
+         b = 0;
+         fill(0);
+         rect(width-400,50,50,50);
+
+        }
+        if(green){
+         g = random(0,255);
+         fill(0,255,0);
+         rect(width-500,50,50,50);
+
+        }
+        else{
+         g = 0;
+         fill(0);
+         rect(width-500,50,50,50);
+
+        }
+      }
+    </script>
+    <canvas id="sketch" style="border: 1px solid black;"></canvas>
+    
+  </body>
+  
+</html>
