@@ -13,7 +13,115 @@
     <p>This is a game that you get to create art. Activate red, green, and blue using their respective keys (r,g,b). Also you can change opacity using o and p.</p>
     
     <script type="text/processing">
-    
+    int totalDots = 100;
+
+    Dot[] dots = new Dot[totalDots];
+
+    color fillColor;
+    float diameter = 6.0;
+
+    void setup(){
+
+
+
+
+      size(500,500);
+
+      fillColor = color(255,0,0);
+
+      fill(fillColor);
+
+      noStroke();
+
+      for(int i = 0; i < totalDots; i++){
+
+        Dot d = new Dot();
+        d.x = random(width);
+
+        d.y = random(height);
+
+        d.vx = random(2.0) - 1.0;
+
+        d.vy = random(2.0) - 1.0;
+
+        dots[i] = d;
+
+      }
+
+
+
+    }
+
+    void draw(){  
+      drawBack();
+
+      float r = 255;
+      float g = 255;
+      float b = 255;
+
+
+      for(int i = 0; i < totalDots; i++)
+      {
+        r = map(dots[i].x, 0, width, 0 , 255);
+        g = map(dots[i].y, 0, height, 0, 255);
+        fill(r,g,b);
+        dots[i].update();
+        ellipse(dots[i].x, dots[i].y, diameter, diameter);
+      }
+
+    }
+
+    void drawBack()
+    { 
+      for(int x = 0 - width/10; x < width; x+= width/10)
+      {
+        for(int y = 0 - height/10; y < height; y+=height/10)
+        {
+          float r1 =  map(x, 0, width, 0 , 255) - 50;
+          float g1 =  map(y, 0, height, 0 , 255) + 50;
+          float b1 =  map(x, 0, width, 0 , 255) + 50;
+          fill(r1, g1, b1, 10);
+
+          float sizeX = x - (x - width/10);
+          float sizeY = y - (y - height/10);
+
+          rect(x - width/10, y - height/10, sizeX, sizeY);
+        }
+      }
+    }
+
+
+    class Dot{
+
+      float x=0.0;
+
+      float y =0.0;
+
+      float vx=0.0;
+      float vy = 0.0;
+
+      void update(){
+        this.vx+=random(2.0) - 1.0;
+        this.vx*=.96;
+
+        this.vy+=random(2.0) - 1.0;
+        this.vy*=.96;
+
+        this.x+=this.vx;
+        this.y+=this.vy;
+
+        if(this.x>width){this.x=width;this.vx*=-1.0;}
+
+        if(this.x<0){this.x = 0; this.vx*=-1.0;}
+
+        if(this.y>height){this.y=height; this.vy*=-1.0;}
+
+        if(this.y<0){this.y = 0; this.vy*=-1.0;}
+
+
+      }
+
+    }
 
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
