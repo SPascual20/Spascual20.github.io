@@ -156,14 +156,14 @@
         ptx3 = ptx1 + 52/2;//top point x
         pty3 = pty1 - 40;//top point y 
         for(int i = 0; i < totalSqrs; i++){//2g
-         sqrIndex = 0;
-         if((sqrs[i].sx >= psx) && (sqrs[i].sx+10 <= psx + 40) && (sqrs[i].sy >= psy) && (sqrs[i].sy+10 <= psy + 40)){//3d
-           sqrValue = sqrsValueIndex.get(i);
-           while(sqrValue != collectedSqrs.get(sqrIndex)){//4g
-            sqrIndex += 1; 
-           }//4g
-           collectedSqrs.remove(sqrIndex);
-           sqrs[i].sUpdate();
+          sqrIndex = 0;
+          if((sqrs[i].sx >= psx) && (sqrs[i].sx+10 <= psx + 40) && (sqrs[i].sy >= psy) && (sqrs[i].sy+10 <= psy + 40)){//3d
+            sqrValue = sqrsValueIndex.get(i);
+            while(sqrValue != collectedSqrs.get(sqrIndex)){//4g
+              sqrIndex += 1; 
+            }//4g
+            collectedSqrs.remove(sqrIndex);
+            sqrs[i].sUpdate();
           }//3d
           if(collectedSqrs.hasValue(i)){//3e
             stroke(51, 240, 83);
@@ -171,7 +171,7 @@
           }//3d
          }//2g
          for(int i = 0; i < totalCrcls; i++){//2h
-          crcls[i].cUpdate();
+           crcls[i].cUpdate();
          }//2h
          for(int i = 0; i < totalTrngl; i++){//2i
           trngl[i].tUpdate();
@@ -180,26 +180,26 @@
       //------------
        void mouseClicked(){//1a
          if((mouseX >= psx) && (mouseX <= psx + 40) && (mouseY >= psy) && (mouseY <= psy + 40) && (sqrDragged == false)){//2
-          sqrDragged = true;
+            sqrDragged = true;
          }//2
          else if(sqrDragged == true){//3
-          sqrDragged = false;
+            sqrDragged = false;
          }//3
          if((sqrt( pow((pcx - mouseX), 2) + pow((pcy - mouseY), 2)) <= (22.5)) && crclDragged == false){//(mouseX >= pcx) && (mouseX <= pcx) && (mouseY >= pcy) && (mouseY <= pcy + 40) && (crclDragged == false)){//4
-          crclDragged = true;
+            crclDragged = true;
          }//4
          else if(crclDragged == true){//5
-          crclDragged = false;
+            crclDragged = false;
          }//5
          if((mouseX >= ptx1) && (mouseX <= ptx2) && (mouseY >= pty3) && (mouseY <= pty1) && (trnglDragged == false)){//(mouseX >= pcx) && (mouseX <= pcx) && (mouseY >= pcy) && (mouseY <= pcy + 40) && (crclDragged == false)){//6
-          trnglDragged = true;
+            trnglDragged = true;
          }//6
          else if(trnglDragged == true){//7
-          trnglDragged = false;
+            trnglDragged = false;
          }//7
-        }//1a
+       }//1a
          //---------
-        class Circle{//1a
+       class Circle{//1a
          float cx;
          float cy;
          float cxvel;
@@ -216,48 +216,48 @@
              ellipse(this.cx, this.cy, 10, 10); 
            }//4
          }//2
-        }//1a
+       }//1a
          //------
-        class Square{//1a
-         float sx;
-         float sy;
-         float sxvel;
-         float syvel;
-         boolean drawMe = true;
-         void sUpdate(){//2
-           if((this.sx >= psx) && (this.sx+10 <= psx + 40) && (this.sy >= psy) && (this.sy+10 <= psy + 40)){//3
-             fill(255);
-             rect(this.sx, this.sy, 10, 10);
-             fill(0);
-             this.sx = 0;
-             this.sy = 0;
-            }//3
-         }//2
+       class Square{//1a
+        float sx;
+        float sy;
+        float sxvel;
+        float syvel;
+        boolean drawMe = true;
+        void sUpdate(){//2
+          if((this.sx >= psx) && (this.sx+10 <= psx + 40) && (this.sy >= psy) && (this.sy+10 <= psy + 40)){//3
+            fill(255);
+            rect(this.sx, this.sy, 10, 10);
+            fill(0);
+            this.sx = 0;
+            this.sy = 0;
+          }//3
+        }//2
        }//1a
        //--------------
        class Triangle{//1a
-         float tx1;
-         float ty1;
-         float tx2;
-         float ty2;
-         float tx3;
-         float ty3;
-         float txvel;
-         float tyvel;
-         boolean drawMe = true;
-         void tUpdate(){//2
-           if((this.tx1 >= ptx1) && (this.tx2 <= ptx2) && (this.ty3 >= pty3) && (this.ty2 <= pty2)){//3
-           fill(255);
-           fill(0);
-           drawMe = false;
-           }//3
-           else if(drawMe == true){//4
-             stroke(24, 28, 234);
-             strokeWeight(2);
-             triangle(this.tx1, this.ty1, this.tx2, this.ty2, this.tx3, this.ty3);
-             strokeWeight(5);
-            }//4
-         }//2
+        float tx1;
+        float ty1;
+        float tx2;
+        float ty2;
+        float tx3;
+        float ty3;
+        float txvel;
+        float tyvel;
+        boolean drawMe = true;
+        void tUpdate(){//2
+          if((this.tx1 >= ptx1) && (this.tx2 <= ptx2) && (this.ty3 >= pty3) && (this.ty2 <= pty2)){//3
+            fill(255);
+            fill(0);
+            drawMe = false;
+          }//3
+          else if(drawMe == true){//4
+            stroke(24, 28, 234);
+            strokeWeight(2);
+            triangle(this.tx1, this.ty1, this.tx2, this.ty2, this.tx3, this.ty3);
+            strokeWeight(5);
+          }//4
+        }//2
        }//1a
      //-----
      </script>
